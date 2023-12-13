@@ -4,17 +4,29 @@ import os
 
 CLOUD_DIR = "cloud_files"
 
+class DuplicatedFileError(Exception):
+    pass
+
+class FilenameInvalidError(Exception):
+    pass
+
 def upload_file(source_path):
     try:
         filename = os.path.basename(source_path)
-        
-        shutil.copy(source_path, os.path.join(os.getcwd(), CLOUD_DIR, filename))
+        destination_path = os.path.join(os.getcwd(), CLOUD_DIR, filename)
+
+        if os.path.exists(destination_path):
+            raise DuplicatedFileError(100, f"Le fichier '{filename}' existe déjà dans le cloud.")
+
+        shutil.copy(source_path, destination_path)
         
         print(f"Fichier '{filename}' uploadé avec succès.")
     except FileNotFoundError:
         print("Fichier source non trouvé.")
-    except Exception as e:
+    except DuplicatedFileError as e:
         print(f"Erreur lors de l'upload : {e}")
+    except Exception as e:
+        print(f"Erreur inattendue lors de l'upload : {e}")
 
 def delete_file(file_name):
     try:
@@ -28,14 +40,19 @@ def delete_file(file_name):
 
 def read_file(file_name):
     try:
+        if not file_name.isalnum():  
+            raise FilenameInvalidError(400, "Le nom de fichier est mal écrit.")
+        
         file_path = os.path.join(os.getcwd(), CLOUD_DIR, file_name)
         with open(file_path, 'r') as file:
             content = file.read()
             print(f"Contenu du fichier '{file_name}':\n{content}")
     except FileNotFoundError:
         print(f"Fichier '{file_name}' non trouvé.")
-    except Exception as e:
+    except FilenameInvalidError as e:
         print(f"Erreur lors de la lecture : {e}")
+    except Exception as e:
+        print(f"Erreur inattendue lors de la lecture : {e}")
 
 def main():
     sg.theme('DarkGrey2')
