@@ -29,6 +29,11 @@ class BadFileTypeError(Exception):
         super().__init__(message)
         self.code = code
 
+class FilenameTooLongError(Exception):
+    def __init__(self, message, code):
+        super().__init__(message)
+        self.code = code
+
 def is_valid_filename(filename):
     if not filename or not filename.isalnum():
         raise FilenameInvalidError(400, "Le nom de fichier est mal écrit.")
