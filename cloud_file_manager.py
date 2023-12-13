@@ -18,15 +18,27 @@ class FileTooLargeError(Exception):
         self.code = code
         super().__init__(self.message)
 
+class FileNotFoundError404(Exception):
+    def __init__(self, message="Fichier non trouvé.", code=404):
+        self.message = message
+        self.code = code
+        super().__init__(self.message)
+
 class BadFileTypeError(Exception):
     def __init__(self, message, code):
         super().__init__(message)
         self.code = code
 
+def is_valid_filename(filename):
+    if not filename or not filename.isalnum():
+        raise FilenameInvalidError(400, "Le nom de fichier est mal écrit.")
+    if len(filename) > 255:
+        raise FilenameTooLongError("Le nom de fichier est trop long.", code=414)
+
 def upload_file(source_path):
     try:
         filename = os.path.basename(source_path)
-        
+
         _, file_extension = os.path.splitext(os.path.basename(source_path))
 
         if file_extension.lower() not in SUPPORTED_FILE_EXTENSIONS:
@@ -46,10 +58,12 @@ def upload_file(source_path):
         
         print(f"Fichier '{filename}' uploadé avec succès.")
     except FileNotFoundError:
-        print("Fichier source non trouvé.")
+        print("Erreur: Fichier source non trouvé (FileNotFound : 404).")
     except DuplicatedFileError as e:
         print(f"Erreur lors de l'upload : {e}")
     except FileTooLargeError as e:
+        print(f"Erreur lors de l'upload : {e}")
+    except BadFileTypeError as e:
         print(f"Erreur lors de l'upload : {e}")
     except Exception as e:
         print(f"Erreur lors de l'upload : {e}")
@@ -60,21 +74,20 @@ def delete_file(file_name):
         os.remove(file_path)
         print(f"Fichier '{file_name}' supprimé avec succès.")
     except FileNotFoundError:
-        print(f"Fichier '{file_name}' non trouvé.")
+        print(f"Erreur: Fichier '{file_name}' non trouvé (FileNotFound : 404).")
     except Exception as e:
         print(f"Erreur lors de la suppression : {e}")
 
 def read_file(file_name):
     try:
-        if not file_name.isalnum():  
-            raise FilenameInvalidError(400, "Le nom de fichier est mal écrit.")
-        
+        is_valid_filename(file_name)
+
         file_path = os.path.join(os.getcwd(), CLOUD_DIR, file_name)
         with open(file_path, 'r') as file:
             content = file.read()
             print(f"Contenu du fichier '{file_name}':\n{content}")
     except FileNotFoundError:
-        print(f"Fichier '{file_name}' non trouvé.")
+        raise FileNotFoundError404("Fichier non trouvé.")
     except FilenameInvalidError as e:
         print(f"Erreur lors de la lecture : {e}")
     except Exception as e:
