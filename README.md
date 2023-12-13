@@ -48,6 +48,9 @@ The program manages several types of errors to ensure a robust user experience:
 
 ```bash
 git clone https://github.com/YourName/cloud-manager.git
+cd cloud-manager
+python cloud_file_manager.py
+
 
 
 
