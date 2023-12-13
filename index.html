@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Uploader de fichiers</title>
+    <link rel="stylesheet" href="cloud.js">
+  </head>
+  <body>
+    <input type="file" id="fileInput" style="display:none" />
+    <button onclick="uploadFile()">Upload</button>
+    <button onclick="deleteFile()">Delete</button>
+    <button onclick="readFile()">Read</button>
+
+    <script>
+      const { ipcRenderer } = require('electron');
+
+      function uploadFile() {
+        const fileInput = document.getElementById('fileInput');
+        fileInput.click();
+
+        fileInput.addEventListener('change', (event) => {
+          const filePath = event.target.files[0].path;
+          ipcRenderer.send('upload-file', filePath);
+        });
+      }
+
+      function deleteFile() {
+        const fileName = prompt("Entrez le nom du fichier à supprimer");
+        if (fileName) {
+          ipcRenderer.send('delete-file', fileName);
+        }
+      }
+
+      function readFile() {
+        const fileName = prompt("Entrez le nom du fichier à lire");
+        if (fileName) {
+          ipcRenderer.send('read-file', fileName);
+        }
+      }
+    </script>
+  </body>
+</html>
