@@ -3,6 +3,8 @@ import shutil
 import os
 
 CLOUD_DIR = "cloud_files"
+SUPPORTED_FILE_EXTENSIONS = {".txt", ".mp4", ".avi", ".pdf", ".jpg", ".jpeg", ".docx"}
+
 
 class DuplicatedFileError(Exception):
     pass
@@ -16,11 +18,20 @@ class FileTooLargeError(Exception):
         self.code = code
         super().__init__(self.message)
 
+class BadFileTypeError(Exception):
+    def __init__(self, message, code):
+        super().__init__(message)
+        self.code = code
+
 def upload_file(source_path):
     try:
         filename = os.path.basename(source_path)
         
-        # Vérifier la taille du fichier
+        _, file_extension = os.path.splitext(os.path.basename(source_path))
+
+        if file_extension.lower() not in SUPPORTED_FILE_EXTENSIONS:
+            raise BadFileTypeError(f"Le type {file_extension} n'est pas autorisé", 400)
+        
         file_size = os.path.getsize(source_path)
         max_file_size_mb = 10
         if file_size > max_file_size_mb * 1024 * 1024:
