@@ -45,15 +45,16 @@ The program manages several types of errors to ensure a robust user experience:
 ## Usage
 
 1. Clone this repository to your local machine.
-
-```bash
 git clone https://github.com/YourName/cloud-manager.git
+
+2. Navigate to the project directory.
 cd cloud-manager
+
+3. Run the program
 python cloud_file_manager.py
 
-exit
 
-1. Clone this repository to your local machine.
+
 
 
 
