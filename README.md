@@ -51,6 +51,11 @@ git clone https://github.com/YourName/cloud-manager.git
 cd cloud-manager
 python cloud_file_manager.py
 
+exit
+
+1. Clone this repository to your local machine.
+
+
 
 
 
