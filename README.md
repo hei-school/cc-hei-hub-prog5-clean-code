@@ -21,7 +21,8 @@ The Cloud File Uploader is a user-friendly application designed to facilitate fi
 
 ## Branches
 
-- **[feature/python](https://github.com/your-username/cc-hei-hub-prog5-clean-code/tree/feature/python):** Includes enhancements related to Python features.
+- **[feature/python](https://github.com/hei-school/cc-hei-hub-prog5-clean-code/tree/feature/python):** Includes enhancements related to Python features.
+- **[feature/js](https://github.com/hei-school/cc-hei-hub-prog5-clean-code/tree/feature/js):** Includes enhancements related to JavaScript features.
 
 
 ## Error Handling
@@ -31,4 +32,5 @@ The application incorporates error handling to enhance robustness:
 - **DuplicatedFileError:** Handles the case when a file with the same name already exists during an upload.
 - **FilenameInvalidError:** Manages errors when an invalid filename is encountered during file operations.
 - **FileTooLargeError:** Ensures that files exceeding a specified size limit are not uploaded.
+- **BadFileTypeError:** Handles errors when attempting to upload files with unsupported file types.
 
