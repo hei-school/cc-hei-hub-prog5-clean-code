@@ -33,4 +33,5 @@ The application incorporates error handling to enhance robustness:
 - **FilenameInvalidError:** Manages errors when an invalid filename is encountered during file operations.
 - **FileTooLargeError:** Ensures that files exceeding a specified size limit are not uploaded.
 - **BadFileTypeError:** Handles errors when attempting to upload files with unsupported file types.
+- **FileNotFoundError:** Handles errors when attempting to delete or read a file that is not found.
 
