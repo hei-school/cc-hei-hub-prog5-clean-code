@@ -10,9 +10,22 @@ class DuplicatedFileError(Exception):
 class FilenameInvalidError(Exception):
     pass
 
+class FileTooLargeError(Exception):
+    def __init__(self, message="Le fichier est trop volumineux.", code=423):
+        self.message = message
+        self.code = code
+        super().__init__(self.message)
+
 def upload_file(source_path):
     try:
         filename = os.path.basename(source_path)
+        
+        # Vérifier la taille du fichier
+        file_size = os.path.getsize(source_path)
+        max_file_size_mb = 10
+        if file_size > max_file_size_mb * 1024 * 1024:
+            raise FileTooLargeError(f"Le fichier dépasse la taille maximale autorisée de {max_file_size_mb} Mo.", code=423)
+
         destination_path = os.path.join(os.getcwd(), CLOUD_DIR, filename)
 
         if os.path.exists(destination_path):
@@ -25,8 +38,10 @@ def upload_file(source_path):
         print("Fichier source non trouvé.")
     except DuplicatedFileError as e:
         print(f"Erreur lors de l'upload : {e}")
+    except FileTooLargeError as e:
+        print(f"Erreur lors de l'upload : {e}")
     except Exception as e:
-        print(f"Erreur inattendue lors de l'upload : {e}")
+        print(f"Erreur lors de l'upload : {e}")
 
 def delete_file(file_name):
     try:
