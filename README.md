@@ -1,4 +1,4 @@
-# Cloud File Uploader
+# Cloud File Manager
 
 This application allows users to upload/delete/read files to a cloud-like storage. It features additional error handling for various scenarios.
 
@@ -12,7 +12,7 @@ This application allows users to upload/delete/read files to a cloud-like storag
 
 ## Introduction
 
-The Cloud File Uploader is a user-friendly application designed to facilitate file management. It provides a simple interface for uploading, deleting, and reading files in a cloud-like storage system.
+The Cloud File Manager is a user-friendly application designed to facilitate file management. It provides a simple interface for uploading, deleting, and reading files in a cloud-like storage system.
 ## Functionality
 
 - **Upload Files:** Users can easily upload files to the cloud storage.
