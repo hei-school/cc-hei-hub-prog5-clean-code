@@ -1,15 +1,53 @@
-# Gestionnaire de fichiers Cloud
-Ce gestionnaire de fichiers Cloud est une application permettant de gérer des fichiers dans un cloud local. Il permet d'uploader, supprimer et lire des fichiers spécifiques.
+# Cloud File Manager with Electron
 
-# Installation
-Assurez-vous d'avoir Node.js installé sur votre machine.
-Clonez ce dépôt dans votre répertoire local.
-Naviguez vers le répertoire où vous avez cloné le dépôt.
-## Installez les dépendances en exécutant npm install electron.
+This Electron app serves as a simple cloud file manager allowing users to upload, delete, and read files in a local cloud directory.
 
-# Utilisation
-Pour lancer l'application, exécutez node cloud_file_manager.js.
-L'application se lance avec une interface utilisateur simple.
-Vous pouvez uploader des fichiers en cliquant sur le bouton "Upload".
-Supprimez des fichiers en saisissant leur nom dans la boîte de dialogue et en cliquant sur "Delete".
-Pour lire un fichier, saisissez son nom dans la boîte de dialogue et cliquez sur "Read".
+## Features
+
+- **Upload Files:**
+  - Select a local file to upload to the cloud directory.
+
+- **Delete Files:**
+  - Remove an existing file from the cloud directory.
+
+- **Read Files:**
+  - Display the content of a specified file in the cloud directory.
+
+## Project Structure
+
+The project consists of the following key files and directories:
+
+- `main.js`: The main Electron script responsible for window creation and app functionality.
+- `index.html`: The HTML file for the Electron app window.
+- `cloud_files/`: The directory where uploaded files are stored.
+
+## Prerequisites
+
+Before running the application, ensure you have [Node.js](https://nodejs.org/) installed.
+
+## Installation
+
+1. Clone the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/YourUsername/electron-cloud-manager.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd electron-cloud-manager
+    ```
+
+3. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+## Usage
+
+Run the application with the following command:
+
+```bash
+npm start
