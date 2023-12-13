@@ -5,7 +5,7 @@ Ce gestionnaire de fichiers Cloud est une application permettant de gérer des f
 Assurez-vous d'avoir Node.js installé sur votre machine.
 Clonez ce dépôt dans votre répertoire local.
 Naviguez vers le répertoire où vous avez cloné le dépôt.
-Installez les dépendances en exécutant npm install.
+## Installez les dépendances en exécutant npm install electron.
 
 # Utilisation
 Pour lancer l'application, exécutez node cloud_file_manager.js.
